@@ -20,7 +20,7 @@ public class CodeController {
     @Autowired
     private CodeGenerator codeGenerator;
 
-    @GetMapping("/test")
+    @GetMapping("/init")
     public void test(HttpServletResponse response) throws Exception {
         ConfigBean config = new ConfigBean();
         config.setDsUrl("jdbc:mysql://localhost:3306/spring?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&zeroDateTimeBehavior=convertToNull&useSSL=false");

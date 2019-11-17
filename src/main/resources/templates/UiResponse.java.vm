@@ -1,0 +1,87 @@
+package ${packageName}.common;
+
+import java.io.Serializable;
+
+public class UiResponse implements Serializable {
+    private int code = -1; //0、成功   其他为失败
+    private String msg;
+    private Object data;
+    private Long count;
+
+    public UiResponse() {
+    }
+
+    public UiResponse(int code, Object data, String msg) {
+        this.code = code;
+        this.msg = msg;
+        this.data = data;
+    }
+
+    public UiResponse(int code, Object data, String msg, Long count) {
+        this.code = code;
+        this.msg = msg;
+        this.data = data;
+        this.count = count;
+    }
+
+
+    public static UiResponse success(Object data, String msg) {
+        return new UiResponse(0, data, msg == null ? "" : msg);
+    }
+
+    public static UiResponse success(Object data, Long count, String msg) {
+        return new UiResponse(0, data, msg == null ? "" : msg, count);
+    }
+
+    public static UiResponse success(String msg) {
+        return new UiResponse(0, null, msg == null ? "" : msg);
+    }
+
+    public static UiResponse success(Object data) {
+        return new UiResponse(0, data, "");
+    }
+
+    public static UiResponse error(String message) {
+        if (message == null || "".equals(message)) {
+            message = "操作失败";
+        }
+        return new UiResponse(-1, null, message);
+    }
+
+    public static UiResponse error() {
+        return new UiResponse(-1, null, "操作失败");
+    }
+
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
+    }
+
+    public Long getCount() {
+        return count;
+    }
+
+    public void setCount(Long count) {
+        this.count = count;
+    }
+}

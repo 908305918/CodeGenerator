@@ -1,0 +1,6 @@
+
+#DB properties:
+spring.datasource.url=${ds.url}
+spring.datasource.username=${ds.username}
+spring.datasource.password=${ds.password}
+spring.datasource.driverClassName=${ds.driverName}

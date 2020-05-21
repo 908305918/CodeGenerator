@@ -1,5 +1,6 @@
 package com.quick.generator.controller;
 
+import com.quick.generator.core.AllCodeGenerator;
 import com.quick.generator.core.CodeGenerator;
 import com.quick.generator.core.ConfigBean;
 import org.apache.commons.io.IOUtils;
@@ -19,6 +20,9 @@ public class CodeController {
 
     @Autowired
     private CodeGenerator codeGenerator;
+
+    @Autowired
+    private AllCodeGenerator allCodeGenerator;
 
     @GetMapping("/init")
     public void init(HttpServletResponse response) throws Exception {
@@ -61,6 +65,24 @@ public class CodeController {
         response.setContentType("application/octet-stream; charset=UTF-8");
 
         IOUtils.write(data, response.getOutputStream());
+    }
+
+    @GetMapping("/initAllCode")
+    public void initAllCode(String dsUrl, String dsUsername, String dsPassword, String prefix,
+                            String packageName, String projectName, HttpServletResponse response) {
+        try {
+            String driveName = "com.mysql.jdbc.Driver";
+            byte[] data = allCodeGenerator.execute(dsUrl, driveName, dsUsername, dsPassword, packageName, prefix, projectName);
+
+            response.setHeader("Content-Disposition", "attachment; filename=\"out.zip\"");
+            response.addHeader("Content-Length", "" + data.length);
+            response.setContentType("application/octet-stream; charset=UTF-8");
+
+            IOUtils.write(data, response.getOutputStream());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

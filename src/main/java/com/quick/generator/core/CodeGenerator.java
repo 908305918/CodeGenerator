@@ -15,8 +15,8 @@ public class CodeGenerator {
         TableGenerator tg = new TableGenerator(config);
         tg.execute(tables);
 
-        FrameGenerator fg = new FrameGenerator(config);
-        fg.execute();
+        //FrameGenerator fg = new FrameGenerator(config);
+        //fg.execute();
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ZipOutputStream zip = new ZipOutputStream(outputStream);

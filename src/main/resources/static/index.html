@@ -12,6 +12,10 @@
 <div id="app" v-cloak class="admin-container">
     <div style="width: 500px;margin:20px auto;">
         <el-form ref="form" :model="form" label-width="100px">
+            <el-form-item label="生成类型">
+                <el-radio v-model="form.type" :label="1">整个数据库</el-radio>
+                <el-radio v-model="form.type" :label="2">指定数据表</el-radio>
+            </el-form-item>
             <el-form-item label="数据库地址">
                 <el-input v-model="form.dsUrl"></el-input>
             </el-form-item>
@@ -30,6 +34,9 @@
             <el-form-item label="项目的名称">
                 <el-input v-model="form.projectName"></el-input>
             </el-form-item>
+            <el-form-item label="指定数据表" v-show="form.type==2">
+                <el-input v-model="form.tables"></el-input>
+            </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="onSubmit">立即创建</el-button>
                 <el-button type="primary">取消</el-button>
@@ -43,24 +50,31 @@
         el: '#app',
         data: {
             form: {
-                dsUrl: "",
-                dsUsername: "",
-                dsPassword: "",
-                prefix: "",
-                packageName: "",
-                projectName: ""
+                type: 1,
+                dsUrl: "jdbc:mysql://192.168.1.61:3306/lgtalentcenter",
+                dsUsername: "root",
+                dsPassword: "123456",
+                prefix: "t_",
+                packageName: "com.iflytek.service",
+                projectName: "talent-center",
+                tables: ""
             }
         },
         methods: {
             onSubmit: function () {
-                console.log('submit!', this.form);
-                window.location = "initAllCode?dsUrl=" + this.form.dsUrl + "&dsUsername=" + this.form.dsUsername
-                    + "&dsPassword=" + this.form.dsPassword + "&prefix=" + this.form.prefix + "&packageName="
-                    + this.form.packageName + "&projectName=" + this.form.projectName
+                console.log('submit:', this.form);
+                if (this.form.type == 1) {
+                    window.location = "initAllCode?dsUrl=" + this.form.dsUrl + "&dsUsername=" + this.form.dsUsername
+                        + "&dsPassword=" + this.form.dsPassword + "&prefix=" + this.form.prefix + "&packageName="
+                        + this.form.packageName + "&projectName=" + this.form.projectName
+                } else {
+                    window.location = "initCode?dsUrl=" + this.form.dsUrl + "&dsUsername=" + this.form.dsUsername
+                        + "&dsPassword=" + this.form.dsPassword + "&prefix=" + this.form.prefix + "&packageName="
+                        + this.form.packageName + "&projectName=" + this.form.projectName + "&tables=" + this.form.tables
+                }
             }
         }
-
-    });
+    })
 </script>
 
 </body>

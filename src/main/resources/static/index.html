@@ -16,6 +16,10 @@
                 <el-radio v-model="form.type" :label="1">整个数据库</el-radio>
                 <el-radio v-model="form.type" :label="2">指定数据表</el-radio>
             </el-form-item>
+            <el-form-item label="数据库类型">
+                <el-radio v-model="form.databaseType" :label="1">Mysql</el-radio>
+                <el-radio v-model="form.databaseType" :label="2">Oracle</el-radio>
+            </el-form-item>
             <el-form-item label="数据库地址">
                 <el-input v-model="form.dsUrl"></el-input>
             </el-form-item>
@@ -51,12 +55,13 @@
         data: {
             form: {
                 type: 1,
-                dsUrl: "jdbc:mysql://192.168.1.61:3306/lgtalentcenter",
-                dsUsername: "root",
+                databaseType: 1,
+                dsUrl: "jdbc:oracle:thin:@192.168.1.233:1521:orcl",
+                dsUsername: "kl_search",
                 dsPassword: "123456",
                 prefix: "t_",
-                packageName: "com.iflytek.service",
-                projectName: "talent-center",
+                packageName: "",
+                projectName: "",
                 tables: ""
             }
         },
@@ -64,13 +69,15 @@
             onSubmit: function () {
                 console.log('submit:', this.form);
                 if (this.form.type == 1) {
-                    window.location = "initAllCode?dsUrl=" + this.form.dsUrl + "&dsUsername=" + this.form.dsUsername
-                        + "&dsPassword=" + this.form.dsPassword + "&prefix=" + this.form.prefix + "&packageName="
-                        + this.form.packageName + "&projectName=" + this.form.projectName
+                    window.location = "initAllCode?databaseType=" + this.form.databaseType + "&dsUrl=" + this.form.dsUrl
+                        + "&dsUsername=" + this.form.dsUsername + "&dsPassword=" + this.form.dsPassword
+                        + "&prefix=" + this.form.prefix + "&packageName=" + this.form.packageName
+                        + "&projectName=" + this.form.projectName
                 } else {
-                    window.location = "initCode?dsUrl=" + this.form.dsUrl + "&dsUsername=" + this.form.dsUsername
-                        + "&dsPassword=" + this.form.dsPassword + "&prefix=" + this.form.prefix + "&packageName="
-                        + this.form.packageName + "&projectName=" + this.form.projectName + "&tables=" + this.form.tables
+                    window.location = "initAllCode?databaseType=" + this.form.databaseType + "&dsUrl=" + this.form.dsUrl
+                        + "&dsUsername=" + this.form.dsUsername + "&dsPassword=" + this.form.dsPassword
+                        + "&prefix=" + this.form.prefix + "&packageName=" + this.form.packageName
+                        + "&projectName=" + this.form.projectName + "&tables=" + this.form.tables
                 }
             }
         }

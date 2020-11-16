@@ -1,0 +1,2 @@
+mvn install:install-file -Dfile=./ojdbc8.jar -DgroupId=com.oracle -DartifactId=ojdbc8 -Dversion=19.3 -Dpackaging=jar
+mvn install:install-file -Dfile=./orai18n.jar -DgroupId=com.oracle -DartifactId=orai18n -Dversion=19.3 -Dpackaging=jar

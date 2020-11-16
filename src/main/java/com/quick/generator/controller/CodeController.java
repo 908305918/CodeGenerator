@@ -48,10 +48,16 @@ public class CodeController {
     }
 
     @GetMapping("/initAllCode")
-    public void initAllCode(String dsUrl, String dsUsername, String dsPassword, String prefix,
-                            String packageName, String projectName, HttpServletResponse response) {
+    public void initAllCode(int databaseType, String dsUrl, String dsUsername, String dsPassword,
+                            String prefix, String packageName, String projectName,
+                            HttpServletResponse response) {
         try {
             String driveName = "com.mysql.jdbc.Driver";
+            if (databaseType == 1) { //mysql
+                driveName = "com.mysql.jdbc.Driver";
+            } else if (databaseType == 2) { //oracle
+                driveName = "oracle.jdbc.driver.OracleDriver";
+            }
             byte[] data = allCodeGenerator.execute(dsUrl, driveName, dsUsername, dsPassword, packageName, prefix, projectName);
 
             response.setHeader("Content-Disposition", "attachment; filename=\"out.zip\"");
@@ -62,7 +68,6 @@ public class CodeController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
 }

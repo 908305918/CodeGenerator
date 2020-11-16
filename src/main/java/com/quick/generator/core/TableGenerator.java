@@ -30,7 +30,6 @@ public class TableGenerator {
 
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-        //gc.setOutputDir(config.getRootPath() + "/src/main/java");
         gc.setOutputDir(config.getRootPath());
         gc.setOpen(false);
         gc.setFileOverride(true);

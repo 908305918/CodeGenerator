@@ -25,12 +25,18 @@ public class CodeController {
     private AllCodeGenerator allCodeGenerator;
 
     @GetMapping("/initCode")
-    public void init(String dsUrl, String dsUsername, String dsPassword, String prefix,
+    public void init(int databaseType, String dsUrl, String dsUsername, String dsPassword, String prefix,
                      String packageName, String projectName, String[] tables,
                      HttpServletResponse response) throws Exception {
+        String driveName = "com.mysql.jdbc.Driver";
+        if (databaseType == 1) { //mysql
+            driveName = "com.mysql.jdbc.Driver";
+        } else if (databaseType == 2) { //oracle
+            driveName = "oracle.jdbc.driver.OracleDriver";
+        }
         ConfigBean config = new ConfigBean();
         config.setDsUrl(dsUrl);
-        config.setDriverName("com.mysql.jdbc.Driver");
+        config.setDriverName(driveName);
         config.setUsername(dsUsername);
         config.setPassword(dsPassword);
         config.setRootPath(fileDir + "/Code/");

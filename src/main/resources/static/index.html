@@ -39,7 +39,7 @@
                 <el-input v-model="form.projectName"></el-input>
             </el-form-item>
             <el-form-item label="指定数据表" v-show="form.type==2">
-                <el-input v-model="form.tables"></el-input>
+                <el-input v-model="form.tables" type="textarea"></el-input>
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="onSubmit">立即创建</el-button>
@@ -62,7 +62,9 @@
                 prefix: "t_",
                 packageName: "",
                 projectName: "",
-                tables: ""
+                tables: "T_ATTACH_FILE,T_KNOWLEDGE_CATEGORY,T_KNOWLEDGE_CLICK_DETAIL,T_KNOWLEDGE_FILE,T_KNOWLEDGE_MAIN," +
+                    "T_KNOWLEDGE_OPERATION_RECORD,T_KNOWLEDGE_VERSION,T_OPERATION_LOG,T_ORG_INFO,T_RESOURCE_INFO," +
+                    "T_ROLE_INFO,T_ROLE_KNOWLEDGE_CATEGORY,T_ROLE_RESOURCE_ACTIONS,T_SEARCH_RECORD,T_USER_INFO,T_USER_ROLE_RELATION"
             }
         },
         methods: {
@@ -74,7 +76,7 @@
                         + "&prefix=" + this.form.prefix + "&packageName=" + this.form.packageName
                         + "&projectName=" + this.form.projectName
                 } else {
-                    window.location = "initAllCode?databaseType=" + this.form.databaseType + "&dsUrl=" + this.form.dsUrl
+                    window.location = "initCode?databaseType=" + this.form.databaseType + "&dsUrl=" + this.form.dsUrl
                         + "&dsUsername=" + this.form.dsUsername + "&dsPassword=" + this.form.dsPassword
                         + "&prefix=" + this.form.prefix + "&packageName=" + this.form.packageName
                         + "&projectName=" + this.form.projectName + "&tables=" + this.form.tables
